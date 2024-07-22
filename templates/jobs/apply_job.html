@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Apply for {{ job.title }}</h1>
+
+{% if timezone.now > job.application_deadline %}
+    <p>The application deadline for this job has passed.</p>
+{% else %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Application</button>
+    </form>
+{% endif %}
+{% endblock %}

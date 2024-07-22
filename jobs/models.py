@@ -55,6 +55,9 @@ class JobListing(models.Model):
     def get_absolute_url(self):
         return reverse("jobs:job-single", args=[self.id])
 
+    def is_application_open(self):
+        return timezone.now() < self.application_deadline
+
 
 class ApplyJob(models.Model):
     name = models.CharField(max_length=50)
@@ -63,4 +66,3 @@ class ApplyJob(models.Model):
 
     def __str__(self):
         return self.name
-    

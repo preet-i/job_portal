@@ -1,9 +1,7 @@
 from django import forms
-from .models import *
-
+from .models import Contact, JobListing, ApplyJob
 
 class ContactForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['Email'].widget.attrs['placeholder'] = 'Enter a valid E-mail'
@@ -18,11 +16,10 @@ class ContactForm(forms.ModelForm):
             'message'
         ]
 
-
 class JobListingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(JobListingForm, self).__init__(*args, **kwargs)
-        self.fields['job_location'].widget.attrs['placeholder'] = 'Bangalore,India'
+        self.fields['job_location'].widget.attrs['placeholder'] = 'Bangalore, India'
         self.fields['Salary'].widget.attrs['placeholder'] = '15-20 LPA, 4k-5k USD, Negotiable'
         self.fields['title'].widget.attrs['placeholder'] = 'Software Engineer, Web Designer'
         self.fields['application_deadline'].widget.attrs['placeholder'] = '2024-08-27'
@@ -35,13 +32,11 @@ class JobListingForm(forms.ModelForm):
             "published_on": "Publish Date"
         }
 
-
 class JobApplyForm(forms.ModelForm):
     class Meta:
         model = ApplyJob
-        fields = '__all__'
+        fields = ['name', 'email', 'file']
         labels = {
             "file": "CV (pdf format)",
             "name": "Full Name"
-
         }
